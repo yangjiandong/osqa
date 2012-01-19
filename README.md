@@ -47,4 +47,14 @@
 
     b. django.core.exceptions.ImproperlyConfigured: App with label attachments could not be found --没影响
 
-   
+    c. copy settings_local.py.dist to settings_local.py
+
+    set APP_URL = "http://...."
+
+    d. add tornado server
+
+    app.py
+    run: python app.py
+
+
+   --END    
