@@ -58,11 +58,11 @@
 
 3. vim nedtree
 
-   delete file
-   Highlight the file you want to delete
-   Press ‘m’
-   Press ‘d’
-   Press ‘y’
+    delete file
+    Highlight the file you want to delete
+    Press ‘m’
+    Press ‘d’
+    Press ‘y’
 
 4. add docs
 
