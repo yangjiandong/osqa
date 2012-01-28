@@ -1,6 +1,12 @@
  学习django系列 - osqa
 ======================
 
+# 2012.01.22
+
+1. nedtree create dir
+
+   When in the NERDTree window, press 'm' 
+
 # 2012.01.19
 
 1. git
