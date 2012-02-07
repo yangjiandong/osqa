@@ -77,9 +77,13 @@ def post_classes(post):
 
     return " ".join(classes)
 
-def post_control(text, url, command=False, withprompt=False, confirm=False, title="", copy=False):
+def post_control(text, url, command=False, withprompt=False, confirm=False, title="", copy=False, extra_classes=[]):
     classes = (command and "ajax-command" or " ") + (withprompt and " withprompt" or " ") + (confirm and " confirm" or " ") + \
         (copy and " copy" or " ")
+
+    for extra_class in extra_classes:
+        classes += " %s" % extra_class
+
     return {'text': text, 'url': url, 'classes': classes, 'title': title}
 
 
@@ -129,8 +133,16 @@ def post_controls(post, user):
             if user.can_view_offensive_flags(post):
                 label =  "%s (%d)" % (label, post.flag_count)
 
-            controls.append(post_control(label, reverse('flag_post', kwargs={'id': post.id}),
-                    command=True, withprompt=True, title=_("report as offensive (i.e containing spam, advertising, malicious text, etc.)")))
+
+            report_control = post_control(label, reverse('flag_post', kwargs={'id': post.id}),
+                    command=True, withprompt=True,
+                    title=_("report as offensive (i.e containing spam, advertising, malicious text, etc.)"))
+
+            # Depending on the setting choose where to attach the control
+            if settings.REPORT_OFFENSIVE_CONTROL_POSITION.value == "more":
+                menu.append(report_control)
+            else:
+                controls.append(report_control)
 
         if user.can_delete_post(post):
             if post.nis.deleted:

@@ -1,8 +1,11 @@
+# -*- coding: utf-8 -*-
+
 from base import *
 import re
 from tag import Tag
 
 import markdown
+from django.utils.encoding import smart_unicode
 from django.utils.translation import ugettext as _
 from django.utils.safestring import mark_safe
 from django.utils.html import strip_tags
@@ -39,7 +42,7 @@ class NodeContent(models.Model):
             return ''
 
     def as_markdown(self, *extensions):
-        return self._as_markdown(self.body, *extensions)
+        return self._as_markdown(smart_unicode(self.body), *extensions)
 
     @property
     def headline(self):
@@ -242,7 +245,7 @@ class Node(BaseModel, NodeContent):
     marked = models.BooleanField(default=False)
 
     comment_count = DenormalizedField("children", node_type="comment", canceled=False)
-    flag_count = DenormalizedField("flags")
+    flag_count = DenormalizedField("actions", action_type="flag", canceled=False)
 
     friendly_name = _("post")
 
