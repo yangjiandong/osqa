@@ -1,0 +1,11 @@
+django
+=======
+
+2012.02.07
+----------
+
+   1.
+   
+   from django.utils.translation import ugettext_lazy as _
+   
+   
