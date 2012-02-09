@@ -1,6 +1,15 @@
  学习django系列 - osqa
 ======================
 
+# 2012.02.09
+
+1. pydev debugger: warning: psyco not available for speedups (the debugger will still work correctly, but a bit slower) 
+
+   http://www.insomnihack.com/?p=412
+   
+2. 更改目录设置，保证在pydev下运行
+
+   
 # 2012.01.22
 
 1. nedtree create dir
