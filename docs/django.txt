@@ -1,11 +1,42 @@
 django
 =======
 
+2012.02.09
+----------
+ 
+   1. django-book 2.0
+   http://code.google.com/p/djangobook-2-code/
+   
 2012.02.07
 ----------
 
-   1.
+   1. django 的国际化
+   
+   http://djangobook.py3k.cn/2.0/chapter19/
    
    from django.utils.translation import ugettext_lazy as _
    
+   移除国际化:
+   a. USE_I18N = False
+   b. or
+   TEMPLATE_CONTEXT_PROCESSORS 设置中移除 'django.core.context_processors.i18n'
    
+   国际化步骤:
+   a. 使用函数 ugettext() 来指定一个翻译字符串,example:output = _("Welcome to my site.")
+   b. 惰性翻译,使用 django.utils.translation.gettext_lazy() 函数，使得其中的值只有在访问时才会被翻译，而不是在 gettext_lazy() 被调用时翻译。
+   c. 模板代码,Django模板使用两种模板标签，且语法格式与Python代码有些许不同。 为了使得模板访问到标签，需要将 {% load i18n %} 放在模板最前面。
+      {% trans %}模板标记翻译一个常量字符串 (括以单或双引号) 或 可变内容
+      ...
+   d. 创建语言文件
+      django-admin.py makemessages -l de
+      --指定扩展名
+      django-admin.py makemessages -l de -e html,txt -e xml    
+   
+      update:
+      django-admin.py makemessages -a
+      
+      编译信息文件
+      django-admin.py compilemessages
+      
+      
+   --END
