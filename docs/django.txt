@@ -1,6 +1,21 @@
 django
 =======
 
+2012.02.10
+----------
+
+   1. django 的设计模式
+   http://dreamond.flycoder.org/?p=139
+   save/django.pattern.txt
+   
+   2. Model proxy
+   如果一个model A继承了另一个model B，并且A和B仅仅是行为方法上的不同，那就没必要为A新建一个表，
+   而可以把A的增删改查代理给B，这在Django中称为proxy model
+   
+   3. ~models.Q
+   
+   4. 装饰器 decorator
+   
 2012.02.09
 ----------
  

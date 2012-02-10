@@ -1,6 +1,43 @@
 osqa.development
 ================
 
+2012.02.09
+----------
+
+   1. tag 中文问题
+   http://www.zhimaq.com/questions/6/osqa
+   
+   forum/models/tag.py (Line 11 class Tag(BaseModel):)
+
+# 原始版本
+def __unicode__(self):
+    return self.name
+
+# 修订版本
+def __unicode__(self):
+try:
+    return self.name.decode("utf8")
+except Exception:
+    return self.name
+    
+    forum/views/readers.py (Line 102 def tag)
+
+# 修订版本
+@decorators.render('questions.html')
+def tag(request, tag):
+    # fix tag page title and tag display(encoding error)
+    try:
+        un_tag = unquote(tag.encode("utf8"))
+        tag = un_tag.decode("utf8")
+    except Exception:
+        un_tag = unquote(tag)
+    return question_list(request,
+                     Question.objects.filter(tags__name=un_tag),
+                     mark_safe(_('questions tagged <span class="tag">%(tag)s</span>') % {'tag': tag}),
+                     None,
+                     mark_safe(_('Questions Tagged With %(tag)s') % {'tag': tag}),
+                     False)
+                     
 2012.02.07
 ----------
 

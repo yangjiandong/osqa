@@ -1,0 +1,80 @@
+Django中的设计模式
+2011年5月27日Dreamond发表评论阅读评论124 次点击
+来简单盘点一下Django中运用了哪些设计模式吧，想到哪写到哪，如有遗漏，请大家补充~
+
+
+1、MVC
+
+    说Django怎么能少了MVC呢，在Django中变成了MTV，相对于MVC，并不是一一对应的关系的。MVC中的M包含了持久化与业务逻辑，MVT中的M一般只负责持久化，而业务逻辑则放到了View中，Django中的C就是URL的映射，由URLConf实现，T也即是MVC中的V。
+
+2、Facade
+
+      django.shortcuts中的render_to_response，典型的Facade模式的运用，其具体功能在render_to_string中完成，render_to_string中调用了get_template或者select_template，render等完成了模板的获取与渲染，为开发者提供可一个方便的接口。
+
+3、Decorator
+
+    在django.contrib.auth模块中大量的使用了Decorator模式，在django.contrib.auth.decorators中出现了大量的Decorator，如常用的permission_required，它的实现是在内部构造测试函数，调用user.has_perm来判断用户是否有权限，然后将测试函数调用装饰器user_passes_test来完成。
+
+    由于Python的语言特性，在函数前用@加上装饰器即可，实现decorator也是非常的方便。对于特定的view做的处理一般会用decorator，对于所有的view要做处理就用middleware了。
+
+4、Factory Method
+
+     比如django.contrib.auth中的User，就包含一个create_user的工厂方法。
+
+    当然，撇开Django，Python本身也有很多工厂方法，比如常用的dict，set之类。
+
+     再比如models.forms中就有modelform_factory这样的方法。
+
+5、Command
+
+    Django在对命令行进行处理时使用了Command模式，在调用manage.py之后，会将后面得参数传给具体的Command来处理。
+
+    在django.core.management.commands保存着manage.py所支持的命令，包括我们常用的runserver等。
+
+6、Template Method
+
+    Django中对Middleware的实现使用了Template模式。
+
+    Middleware通过类似钩子的形式可以插入到request处理的各个环节中，包括view之前之后，模板渲染之前，抛出异常时等等。
+
+    参见：https://docs.djangoproject.com/en/1.3/topics/http/middleware/
+
+7、Singleton
+
+    不可能没有的，现在还没找到…
+
+8、Observer
+
+    Django中对于model的增删改查设置了相应的信号，用户可以定义回调函数来Observe这些信号。
+
+    一般用来实现一些日志系统。
+
+    参见：https://docs.djangoproject.com/en/1.3/topics/signals/
+
+9、Iterator
+
+    这个也在model中用的很多，QuerySet就是iterable的，并且也只有当第一次迭代的时候，才真正完成查询
+
+10、Adapter
+
+    Django像其他持久化框架一样，也是使用Adapter来统一不同数据库的接口，达到支持不同数据库的目的。
+
+11、Proxy
+
+    在Django中，如果一个model A继承了另一个model B，并且A和B仅仅是行为方法上的不同，那就没必要为A新建一个表，而可以把A的增删改查代理给B，这在Django中称为proxy model。
+
+    参见：https://docs.djangoproject.com/en/dev/topics/db/models/#proxy-models
+
+12、Composite
+
+    Django中，我们要渲染模板只需要调用模板的render方法。实际上，模板中的每个标签，都是一个template.Node实例，他们以树状的结构组织，Node具有render方法，用来渲染他自己的内容，当它渲染完成后，就会依次调用它的子节点的render方法。
+
+    所以当我们调用template的render方法时，实际上是对整个Node树进行了render。
+
+    参见：https://docs.djangoproject.com/en/1.3/howto/custom-template-tags/
+
+13、Strategy
+
+    比如上文提到的user_passes_test，第一个参数就是一个函数对象，用于判断用户是否能通过，这个函数对象就是一种Strategy。当然，像Python中的排序之类的也可以传递一个对比函数。
+
+ 

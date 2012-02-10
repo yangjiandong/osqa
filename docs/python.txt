@@ -34,4 +34,11 @@ Window -> preferences -> Pydev -> Pylint,选中 "Use pylint?"
 在下方的 Arguments to pass to pylint 处输入 --rcfile="E:/svn/misc/pylint.conf"，以使用自己的 pylintrc 配置
 Project -> Properties -> PyDev?-PYTHONPATH 增添项目的源文件目录到"Project Source Folders"。
    
+   --paraot.py
+   --ID:E0202 python An attribute affected in hide this method
+   --解决方法
+   # pylint: disable=W0401, E0202
+   # pylint: enable-msg=C0302
+   
+   
    --END

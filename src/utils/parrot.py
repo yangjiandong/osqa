@@ -1,4 +1,6 @@
 #-*- coding: utf-8 -*-#
+# pylint: disable=W0401, E0202
+# pylint: enable-msg=C0302
 
 #显式的继承object
 class Parrot(object):
