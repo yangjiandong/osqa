@@ -39,7 +39,9 @@ TEMPLATE_CONTEXT_PROCESSORS = [
     'django.core.context_processors.auth',
 ]
 
+#urls.py
 ROOT_URLCONF = 'urls'
+#需要在每个URL后添加斜杠
 APPEND_SLASH = True
 
 TEMPLATE_DIRS = (

@@ -1,6 +1,16 @@
 python
 ======
 
+2012.02.12
+----------
+
+   1. Python 要求单元素元组中必须使用逗号，以此消除与圆括号表达式之间的歧义。 
+   这是新手常犯的错误。
+   # Comma correctly in place.
+TEMPLATE_DIRS = (
+    '/home/django/mysite/templates',
+)
+
 2012.02.10
 ----------
 
