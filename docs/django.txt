@@ -1,6 +1,26 @@
 django
 =======
 
+2012.02.13
+----------
+
+   1. html自动转意
+   用safe过滤器为单独的变量关闭自动转意
+   用标签autoescape来包装整个模板(或者模板中常用的部分)
+   
+   2. 合法的标签库
+   templatetags/
+   请在你的模块的顶部插入如下语句：
+   from django import template
+   register = template.Library()
+   
+   需要用 Library 实例来注册它，这样就能通过Django的模板语言来使用了：
+   register.filter('cut', cut)
+   register.filter('lower', lower)
+   或
+   装饰器register.filter()：
+   @register.filter(name='cut')
+   
 2012.02.12
 ----------
 
