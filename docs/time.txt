@@ -23,7 +23,9 @@
    
    http://djangobook.py3k.cn/2.0/chapter16/
    集成的子框架 django.contrib
-   
+
+   2. use intellij
+
 2012.02.13
 ----------
 
