@@ -1,6 +1,50 @@
 django
 =======
 
+2012.02.14
+----------
+
+   1. 表字段维护
+   book model 中增加定义:
+   num_pages = models.IntegerField(blank=True, null=True)
+   
+   显示相应sql:
+   manage.py sqlall books
+   
+   数据库后台操作:
+   ALTER TABLE books_book ADD COLUMN num_pages integer;
+   --以上操作有点笨
+   
+   2. 增加额外的manager方法是为模块添加表级功能的首选办法
+   class BookManager(models.Manager):
+     def title_count(self, keyword):
+       return self.filter(title__icontains=keyword).count()
+   
+   3. property 方法
+   def _get_full_name(self):
+        "Returns the person's full name."
+        return u'%s %s' % (self.first_name, self.last_name)
+   full_name = property(_get_full_name)
+   
+   4. 执行原始SQL查询
+from django.db import connection, models
+
+class PersonManager(models.Manager):
+    def first_names(self, last_name):
+        cursor = connection.cursor()
+        cursor.execute("""
+            SELECT DISTINCT first_name
+            FROM people_person
+            WHERE last_name = %s""", [last_name])
+        return [row[0] for row in cursor.fetchone()]
+
+class Person(models.Model):
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
+    objects = PersonManager()
+    
+Person.objects.first_names('Lennon')
+    
 2012.02.13
 ----------
 

@@ -1,6 +1,29 @@
 时间统计
 ========
 
+2012.02.14
+----------
+
+   1. http://djangobook.py3k.cn/2.0/chapter09/
+   20:10 - 20:35
+   
+   http://djangobook.py3k.cn/2.0/chapter13/
+   图片,csv,pdf等输出
+   20:42 - 20:59
+   缓存
+   http://djangobook.py3k.cn/2.0/chapter15/
+   Memcached
+   或数据库缓存
+   python manage.py createcachetable [cache_table_name]
+   CACHE_BACKEND设置为”db://tablename”
+   文件缓存
+   CACHE_BACKEND = 'file:///var/tmp/django_cache'
+   内存缓存
+   CACHE_BACKEND = 'locmem:///'
+   
+   http://djangobook.py3k.cn/2.0/chapter16/
+   集成的子框架 django.contrib
+   
 2012.02.13
 ----------
 
