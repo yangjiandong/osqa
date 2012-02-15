@@ -1,6 +1,14 @@
 osqa.development
 ================
 
+2012.02.15
+----------
+
+   1. osqa settings_local.py
+   DEBUG = True
+   暂时备注以下文件
+   D:\workspace\python\workspace\osqa.git\src\forum\skins\default\templates\sidebar\recent_awards.html
+
 2012.02.09
 ----------
 
