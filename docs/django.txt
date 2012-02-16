@@ -5,6 +5,9 @@ django
 ----------
 
    1. 关注下 https://github.com/vicalloy
+   https://github.com/vicalloy/timeline-site
+   https://github.com/vicalloy/LBForum
+   Branch_0.7 \scripts\create_lbforum_env.py初始化lbforum的python虚拟环境
    
 2012.02.14
 ----------

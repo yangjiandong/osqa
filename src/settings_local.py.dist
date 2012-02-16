@@ -35,21 +35,32 @@ DATABASES = {
     }
 }
 
+#if DEBUG:
+#    CACHE_BACKEND = 'locmem:///'
+#else:
 CACHE_BACKEND = 'file://%s' % os.path.join(os.path.dirname(__file__),'cache').replace('\\','/')
+
+#缓存策略
+# 文件
+#CACHE_BACKEND = 'file://%s' % os.path.join(os.path.dirname(__file__),'cache').replace('\\','/')
 #CACHE_BACKEND = 'dummy://'
+
+
+#session 存放策略
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 
 # This should be equal to your domain name, plus the web application context.
 # This shouldn't be followed by a trailing slash.
 # I.e., http://www.yoursite.com or http://www.hostedsite.com/yourhostapp
-APP_URL = 'http://'
+APP_URL = 'http://www.osqa.com'
 
 #LOCALIZATIONS
 TIME_ZONE = 'America/New_York'
 
 #OTHER SETTINGS
 
-USE_I18N = True
+# 不用国际化
+USE_I18N = False
 LANGUAGE_CODE = 'en'
 
 DJANGO_VERSION = 1.1

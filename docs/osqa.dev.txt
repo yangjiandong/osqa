@@ -1,6 +1,11 @@
 osqa.development
 ================
 
+2012.02.16
+----------
+
+   1. pydev 下设置src 为source code,intellij 还有点问题
+
 2012.02.15
 ----------
 
