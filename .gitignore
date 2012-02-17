@@ -3,6 +3,7 @@ _build
 .settings
 .idea
 osqa.git.iml
+osqa-pydev.iml
 
 src/settings_local.py
 src/cache
