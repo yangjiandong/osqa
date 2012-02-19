@@ -111,7 +111,24 @@ INSTALLED_APPS = [
     'django.contrib.sitemaps',
     'django.contrib.markup',
     'forum',
+    #solr
+    'haystack',
 ]
+
+#solr
+HAYSTACK_SITECONF = 'search_sites' #之前创建的文件名
+HAYSTACK_SEARCH_ENGINE = 'solr'
+HAYSTACK_SOLR_URL = 'http://127.0.0.1:8080/solr/'
+HAYSTACK_SOLR_TIMEOUT = 60 * 5
+HAYSTACK_INCLUDE_SPELLING = True
+HAYSTACK_BATCH_SIZE = 100
+ 
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
+        'URL': 'http://127.0.0.1:8080/solr'
+    },
+}
 
 if DEBUG:
     try:

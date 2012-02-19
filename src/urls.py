@@ -11,5 +11,11 @@ if 'rosetta' in settings.INSTALLED_APPS:
         url(r'^rosetta/', include('rosetta.urls')),
     ) + urlpatterns
 
+urlpatterns = patterns('',
+        url(r'^solr_search/', include('haystack.urls')),
+    ) + urlpatterns
+    
+
+
 handler404 = 'forum.views.meta.page'
 handler500 = 'forum.views.meta.error_handler'

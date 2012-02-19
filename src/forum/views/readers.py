@@ -75,6 +75,7 @@ def feed(request):
 @decorators.render('index.html')
 def index(request):
     paginator_context = QuestionListPaginatorContext()
+    # 自动对应到 questions url
     paginator_context.base_path = reverse('questions')
     return question_list(request,
                          Question.objects.all(),

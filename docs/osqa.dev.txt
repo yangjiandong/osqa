@@ -1,11 +1,23 @@
 osqa.development
 ================
 
+2012.02.19
+----------
+
+   1. model
+   User --> BaseModel
+   表名策略
+   app_label = 'forum' -- 表名前缀 
+   https://docs.djangoproject.com/en/dev/ref/models/options/
+   
+   TODO 主键字段策略? user_ptr_id
+   
 2012.02.16
 ----------
 
    1. pydev 下设置src 为source code,intellij 还有点问题
-
+   新版本下，重新生成下就可以
+   
 2012.02.15
 ----------
 
@@ -54,4 +66,4 @@ def tag(request, tag):
 2012.02.07
 ----------
 
-   1. forum.setings.
+   1. forum.setings

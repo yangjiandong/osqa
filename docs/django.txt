@@ -1,6 +1,34 @@
 django
 =======
 
+2012.02.19
+----------
+
+   1. django,solr
+   http://dmyz.org/archives/354
+   
+   pip install pysolr,django-haystack
+   src/forum/skins/default/templates/search/search.html
+   src/search_sites.py
+   src/settings.py
+   src/urls.py
+   
+   2. django less
+   http://dmyz.org/archives/336
+   
+   npm install less -g
+   
+   3. django use nosql,mongodb
+   pip install -U mongoengine
+   pip install pymongo
+   
+2012.02.17
+----------
+
+   1. django reverse()
+   自动对应url,
+   url配置好后,如(r^'list/member','haha'),不需硬编码，编码中只要用reverse('haha')
+   
 2012.02.16
 ----------
 
