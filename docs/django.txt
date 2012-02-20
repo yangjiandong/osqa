@@ -24,6 +24,9 @@ django
    
    Executing custom SQL directly
    
+   2. django 项目 
+   https://github.com/p2pu/lernanta
+   
 2012.02.19
 ----------
 

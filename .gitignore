@@ -6,6 +6,6 @@ osqa.git.iml
 osqa-pydev.iml
 out
 
-src/settings_local.py
-src/cache
-src/forum/actions/.ropeproject
+osqa/settings_local.py
+osqa/cache
+osqa/forum/actions/.ropeproject
