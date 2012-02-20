@@ -1,6 +1,29 @@
 django
 =======
 
+2012.02.20
+----------
+   
+   1. django 访问存储过程
+   http://stackoverflow.com/questions/805393/what-is-the-best-way-to-access-stored-procedures-in-djangos-orm
+   
+   http://djangosnippets.org/snippets/118/
+   models/model.util.py
+   
+   other:
+   use the connection utility in Django:
+   from django.db import connection
+   cursor = connection.cursor()
+   cursor.execute("SQL STATEMENT CAN BE ANYTHING")
+   then you can fetch the data:
+   
+   cursor.fetchone()
+   or:
+   cursor.fetchall()
+   More info here: http://docs.djangoproject.com/en/dev/topics/db/sql/
+   
+   Executing custom SQL directly
+   
 2012.02.19
 ----------
 

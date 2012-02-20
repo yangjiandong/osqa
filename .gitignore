@@ -4,6 +4,7 @@ _build
 .idea
 osqa.git.iml
 osqa-pydev.iml
+out
 
 src/settings_local.py
 src/cache
