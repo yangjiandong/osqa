@@ -1,3 +1,6 @@
+#!/usr/bin/envs python
+#-*- coding: utf-8 -*-#
+
 from base import *
 from utils import PickledObjectField
 from django.conf import settings as django_settings
