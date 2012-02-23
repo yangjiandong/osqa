@@ -1,6 +1,15 @@
 django
 =======
 
+2012.02.23
+----------
+   
+   1. use cherrypy
+   http://www.defuze.org/archives/262-hosting-a-django-application-on-a-cherrypy-server.html
+   
+   pip install cherrypy
+   run_cherrypy.py
+   
 2012.02.20
 ----------
    
