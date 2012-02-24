@@ -1,6 +1,15 @@
 django
 =======
 
+2012.02.24
+----------
+
+   1. 在top监视窗口显示Django当前正在执行的请求URL
+   http://ahuaxuan.iteye.com/blog/286277
+   forum/middleware/process_request.py
+   
+   在django中写一个middleware.然后在 process_request方法中修改当前进程的名称 
+   
 2012.02.23
 ----------
    
