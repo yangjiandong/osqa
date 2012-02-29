@@ -5,6 +5,7 @@ _build
 osqa.git.iml
 osqa-pydev.iml
 out
+.ropeproject
 
 osqa/settings_local.py
 osqa/cache
