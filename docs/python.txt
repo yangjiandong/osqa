@@ -1,6 +1,28 @@
 python
 ======
 
+2012.03.06
+----------
+
+   1. ipython save
+   --save 1-20 line to my.py
+   %save my_meta_class.py 1-20
+   http://stackoverflow.com/questions/100003/what-is-a-metaclass-in-python
+
+   21:12 - 22:17
+   line 3
+
+   type:
+   type(name of the class, 
+       tuple of the parent class (for inheritance, can be empty), 
+       dictionary containing attributes names and values)
+    
+    %save my_meta_class2.py 3-21
+
+    my_meta_class3.py
+
+    __metaclass__, 感觉还是很高深,没真正理解,django orm 中先用了再说
+
 2012.02.29
 ----------
 
