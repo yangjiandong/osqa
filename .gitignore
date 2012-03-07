@@ -10,3 +10,5 @@ out
 osqa/settings_local.py
 osqa/cache
 osqa/forum/actions/.ropeproject
+osqa/osqa.pr.sublime-project
+osqa/osqa.pr.sublime-workspace

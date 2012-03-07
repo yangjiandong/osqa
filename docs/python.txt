@@ -1,6 +1,70 @@
 python
 ======
 
+2012.03.07
+----------
+
+   1. http://stackoverflow.com/questions/101268/hidden-features-of-python
+
+   a) Argument Unpacking:
+Function argument unpacking
+You can unpack a list or a dictionary as function arguments using * and **.
+For example:
+
+def draw_point(x, y):
+    # do some magic
+
+point_foo = (3, 4)
+point_bar = {'y': 3, 'x': 2}
+
+draw_point(*point_foo)
+draw_point(**point_bar)
+
+   b) Dictionaries have a get() method
+
+Dictionaries have a 'get()' method. If you do d['key'] and key isn't there, you get an exception. If you do d.get('key'), you get back None if 'key' isn't there. You can add a second argument to get that item back instead of None, eg: d.get('key', 0).
+
+   c) enumerate
+Wrap an iterable with enumerate and it will yield the item along with its index.
+For example:
+>>> a = ['a', 'b', 'c', 'd', 'e']
+>>> for index, item in enumerate(a): print index, item
+...
+0 a
+1 b
+2 c
+3 d
+4 e
+>>>
+
+   d) Creating generators objects
+If you write
+x=(n for n in foo if bar(n))
+you can get out the generator and assign it to x. Now it means you can do
+for n in x:
+The advantage of this is that you don't need intermediate storage, which you would need if you did
+x = [n for n in foo if bar(n)]
+In some cases this can lead to significant speed up.
+You can append many if statements to the end of the generator, basically replicating nested for loops:
+>>> n = ((a,b) for a in range(0,2) for b in range(4,6))
+>>> for i in n:
+...   print i 
+
+(0, 4)
+(0, 5)
+(1, 4)
+(1, 5)
+
+   e) The step argument in slice operators. For example:
+
+a = [1,2,3,4,5]
+>>> a[::2]  # iterate over the whole list in 2-increments
+[1,3,5]
+The special case x[::-1] is a useful idiom for 'x reversed'.
+
+>>> a[::-1]
+[5,4,3,2,1]
+
 2012.03.06
 ----------
 
