@@ -1,3 +1,6 @@
+#!/usr/bin/envs python
+#-*- coding: utf-8 -*-#
+
 from django.utils.translation import ugettext as _
 from base import *
 
