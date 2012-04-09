@@ -9,13 +9,6 @@ SECRET_KEY = '$oo^&_m&qwbib=(_4m_n*zn-d=g#s0he5fx9xonnym#8p6yigm'
 
 CACHE_MAX_KEY_LENGTH = 235
 
-TEMPLATE_LOADERS = [
-    'django.template.loaders.filesystem.load_template_source',
-    'django.template.loaders.app_directories.load_template_source',
-    'forum.modules.template_loader.module_templates_loader',
-    'forum.skins.load_template_source',
-]
-
 MIDDLEWARE_CLASSES = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.middleware.csrf.CsrfResponseMiddleware',
@@ -39,9 +32,7 @@ TEMPLATE_CONTEXT_PROCESSORS = [
     'django.core.context_processors.auth',
 ]
 
-#urls.py
 ROOT_URLCONF = 'urls'
-#需要在每个URL后添加斜杠
 APPEND_SLASH = True
 
 TEMPLATE_DIRS = (
@@ -59,6 +50,23 @@ ALLOW_MAX_FILE_SIZE = 1024 * 1024
 
 # User settings
 from settings_local import *
+
+if DEBUG:
+    TEMPLATE_LOADERS = [
+        'django.template.loaders.filesystem.load_template_source',
+        'django.template.loaders.app_directories.load_template_source',
+        'forum.modules.template_loader.module_templates_loader',
+        'forum.skins.load_template_source',
+    ]
+else:
+    TEMPLATE_LOADERS = [
+        ('django.template.loaders.cached.Loader',(
+            'django.template.loaders.filesystem.load_template_source',
+            'django.template.loaders.app_directories.load_template_source',
+            'forum.modules.template_loader.module_templates_loader',
+            'forum.skins.load_template_source',
+            )),
+    ]
 
 try:
     if len(FORUM_SCRIPT_ALIAS) > 0:
@@ -111,24 +119,7 @@ INSTALLED_APPS = [
     'django.contrib.sitemaps',
     'django.contrib.markup',
     'forum',
-    #solr
-    'haystack',
 ]
-
-#solr
-HAYSTACK_SITECONF = 'search_sites' #之前创建的文件名
-HAYSTACK_SEARCH_ENGINE = 'solr'
-HAYSTACK_SOLR_URL = 'http://127.0.0.1:8080/solr/'
-HAYSTACK_SOLR_TIMEOUT = 60 * 5
-HAYSTACK_INCLUDE_SPELLING = True
-HAYSTACK_BATCH_SIZE = 100
- 
-HAYSTACK_CONNECTIONS = {
-    'default': {
-        'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
-        'URL': 'http://127.0.0.1:8080/solr'
-    },
-}
 
 if DEBUG:
     try:

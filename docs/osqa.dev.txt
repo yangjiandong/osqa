@@ -1,23 +1,28 @@
 osqa.development
 ================
 
+2012.04.09
+----------
+
+   1. 同步官方git code 2012.04.08
+
 2012.02.19
 ----------
 
    1. model
    User --> BaseModel
    表名策略
-   app_label = 'forum' -- 表名前缀 
+   app_label = 'forum' -- 表名前缀
    https://docs.djangoproject.com/en/dev/ref/models/options/
-   
+
    TODO 主键字段策略? user_ptr_id
-   
+
 2012.02.16
 ----------
 
    1. pydev 下设置src 为source code,intellij 还有点问题
    新版本下，重新生成下就可以
-   
+
 2012.02.15
 ----------
 
@@ -31,7 +36,7 @@ osqa.development
 
    1. tag 中文问题
    http://www.zhimaq.com/questions/6/osqa
-   
+
    forum/models/tag.py (Line 11 class Tag(BaseModel):)
 
 # 原始版本
@@ -44,7 +49,7 @@ try:
     return self.name.decode("utf8")
 except Exception:
     return self.name
-    
+
     forum/views/readers.py (Line 102 def tag)
 
 # 修订版本
@@ -62,7 +67,7 @@ def tag(request, tag):
                      None,
                      mark_safe(_('Questions Tagged With %(tag)s') % {'tag': tag}),
                      False)
-                     
+
 2012.02.07
 ----------
 

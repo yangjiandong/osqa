@@ -1,6 +1,3 @@
-#!/usr/bin/envs python
-#-*- coding: utf-8 -*-#
-
 from base import *
 from utils import PickledObjectField
 from django.conf import settings as django_settings
@@ -131,9 +128,7 @@ class User(BaseModel, DjangoUser):
     is_approved = models.BooleanField(default=False)
     email_isvalid = models.BooleanField(default=False)
 
-    # 信誉值
     reputation = models.IntegerField(default=0)
-    # 用户等级，金银铜
     gold = models.PositiveIntegerField(default=0)
     silver = models.PositiveIntegerField(default=0)
     bronze = models.PositiveIntegerField(default=0)
@@ -170,8 +165,8 @@ class User(BaseModel, DjangoUser):
         #todo: temporary thing, for now lets just assume that the site owner will always be the first user of the application
         return self.id == 1
 
-    @property
-    def decorated_name(self):
+
+    def _decorated_name(self):
         username = smart_unicode(self.username)
 
         if len(username) > TRUNCATE_USERNAMES_LONGER_THAN and TRUNCATE_LONG_USERNAMES:
@@ -185,6 +180,10 @@ class User(BaseModel, DjangoUser):
                 return u"%s \u2666" % username
 
         return username
+
+    @property
+    def decorated_name(self):
+        return self._decorated_name()
 
     @property
     def last_activity(self):

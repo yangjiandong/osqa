@@ -317,15 +317,26 @@ class Node(BaseModel, NodeContent):
 
     @property
     def summary(self):
-        content = strip_tags(self.html)[:SUMMARY_LENGTH]
+        content = strip_tags(self.html)
 
         # Remove multiple spaces.
         content = re.sub(' +',' ', content)
 
-        # Remove line breaks. We don't need them at all.
-        content = content.replace("\n", '')
+        # Replace line breaks with a space, we don't need them at all.
+        content = content.replace("\n", ' ')
+
+        # Truncate and all an ellipsis if length greater than summary length.
+        content = (content[:SUMMARY_LENGTH] + '...') if len(content) > SUMMARY_LENGTH else content
 
         return content
+
+    # Can be used to block subscription notifications for a specific node from a module
+    def _is_notifiable(self):
+        return True
+
+    @property
+    def is_notifiable(self):
+        return self._is_notifiable()
 
     @models.permalink
     def get_revisions_url(self):

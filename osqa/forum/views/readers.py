@@ -75,7 +75,6 @@ def feed(request):
 @decorators.render('index.html')
 def index(request):
     paginator_context = QuestionListPaginatorContext()
-    # 自动对应到 questions url
     paginator_context.base_path = reverse('questions')
     return question_list(request,
                          Question.objects.all(),
@@ -93,7 +92,9 @@ def unanswered(request):
 
 @decorators.render('questions.html', 'questions', _('questions'), weight=0)
 def questions(request):
-    return question_list(request, Question.objects.all(), _('questions'))
+    return question_list(request,
+                         Question.objects.all(),
+                         _('questions'))
 
 @decorators.render('questions.html')
 def tag(request, tag):
@@ -172,9 +173,13 @@ def question_list(request, initial,
                   allowIgnoreTags=True,
                   feed_url=None,
                   paginator_context=None,
+                  show_summary=None,
                   feed_sort=('-added_at',),
                   feed_req_params_exclude=(_('page'), _('pagesize'), _('sort')),
                   extra_context={}):
+
+    if show_summary is None:
+        show_summary = bool(settings.SHOW_SUMMARY_ON_QUESTIONS_LIST)
 
     questions = initial.filter_state(deleted=False)
 
@@ -213,6 +218,7 @@ def question_list(request, initial,
         'page_title' : page_title,
         'tab' : 'questions',
         'feed_url': feed_url,
+        'show_summary' : show_summary,
     }
     context.update(extra_context)
 
