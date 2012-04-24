@@ -241,18 +241,24 @@ def export_upfiles(tf):
     folder = str(settings.UPFILES_FOLDER)
 
     if os.path.exists(folder):
-        tf.add(folder, arcname='/upfiles')
+        if isinstance(tf, zipfile.ZipFile):
+            tf.write(folder, arcname='/upfiles')
+        else:
+            tf.add(folder, arcname='/upfiles')
 
 
 def export_skinsfolder(tf):
     folder = djsettings.TEMPLATE_DIRS[0]
 
     if os.path.exists(folder):
-        tf.add(folder, arcname='/skins')
+        if isinstance(tf, zipfile.ZipFile):
+            tf.write(folder, arcname='/skins')
+        else:
+            tf.add(folder, arcname='/skins')
 
 
 def export(options, user):
-    original__write = xml.etree.ElementTree.ElementTree._write
+    original__write = xml.etree.ElementTree.ElementTree.write
     xml.etree.ElementTree.ElementTree._write = Etree_pretty__write
     xml.etree.ElementTree._ElementInterface.add = ET_Element_add_tag
 
@@ -404,29 +410,34 @@ def export_users(u, el, anon_data):
         key.add('provider', a.provider)
         key.add('key', a.key)
 
+    try:
+        ss = u.subscription_settings
 
-    ss = u.subscription_settings
+        notify = el.add('notifications', enabled=ss.enable_notifications and 'true' or 'false')
 
-    notify = el.add('notifications', enabled=ss.enable_notifications and 'true' or 'false')
+        notify.add('notify', **dict([(t, ss.__dict__.get(t, 'n') == 'i' and 'true' or 'false') for t in ['member_joins', 'new_question', 'new_question_watched_tags', 'subscribed_questions']]))
 
-    notify.add('notify', **dict([(t, ss.__dict__.get(t, 'n') == 'i' and 'true' or 'false') for t in ['member_joins', 'new_question', 'new_question_watched_tags', 'subscribed_questions']]))
+        notify.add('autoSubscribe', **dict([(t, ss.__dict__.get(t, False) and 'true' or 'false') for t in [
+                'all_questions', 'all_questions_watched_tags', 'questions_asked', 'questions_answered', 'questions_commented', 'questions_viewed']]))
 
-    notify.add('autoSubscribe', **dict([(t, ss.__dict__.get(t, False) and 'true' or 'false') for t in [
-            'all_questions', 'all_questions_watched_tags', 'questions_asked', 'questions_answered', 'questions_commented', 'questions_viewed']]))
+        notify.add('notifyOnSubscribed', **dict([(t, ss.__dict__.get("notify_%s" % t, False) and 'true' or 'false') for t in [
+                'answers', 'reply_to_comments', 'comments_own_post', 'comments', 'accepted']]))
 
-    notify.add('notifyOnSubscribed', **dict([(t, ss.__dict__.get("notify_%s" % t, False) and 'true' or 'false') for t in [
-            'answers', 'reply_to_comments', 'comments_own_post', 'comments', 'accepted']]))
-
-    notify.add('digest', ss.send_digest and 'on' or 'off')
+        notify.add('digest', ss.send_digest and 'on' or 'off')
+    except SubscriptionSettings.DoesNotExist:
+        pass
 
     watched = el.add('watchedTags')
     rejected = el.add('rejectedTags')
 
     for m in u.tag_selections.all():
-        if m.reason == 'good':
-            watched.add('tag', m.tag.name)
-        else:
-            rejected.add('tag', m.tag.name)
+        try:
+            if m.reason == 'good':
+                watched.add('tag', m.tag.name)
+            else:
+                rejected.add('tag', m.tag.name)
+        except Tag.DoesNotExist:
+            pass
 
     
 

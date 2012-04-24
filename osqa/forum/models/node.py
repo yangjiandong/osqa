@@ -257,7 +257,7 @@ class Node(BaseModel, NodeContent):
     @classmethod
     def _generate_cache_key(cls, key, group="node"):
         return super(Node, cls)._generate_cache_key(key, group)
-        
+
     @classmethod
     def get_type(cls):
         return cls.__name__.lower()
