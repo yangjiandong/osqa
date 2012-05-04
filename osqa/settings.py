@@ -121,6 +121,15 @@ INSTALLED_APPS = [
     'forum',
 ]
 
+HAYSTACK_SITECONF = 'osqa.search_sites' 
+#If you choose whoosh as search backend uncomment following 2 lines and comment last 2 lines 
+HAYSTACK_SEARCH_ENGINE = 'whoosh'
+HAYSTACK_WHOOSH_PATH = '/home/xyz/django_projects/index' 
+#HAYSTACK_SEARCH_ENGINE = 'xapian' 
+#HAYSTACK_XAPIAN_PATH = '/home/xyz/django_projects/xapian-index'
+
+#Read more: http://www.nitinh.com/2009/10/implementing-search-in-django-site-using-haystack-and-xapian-whoosh/#ixzz1tRWeUbeF
+
 if DEBUG:
     try:
         import debug_toolbar
