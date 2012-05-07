@@ -11,6 +11,55 @@ logging.basicConfig(
     level=logging.ERROR,
     format='%(pathname)s TIME: %(asctime)s MSG: %(filename)s:%(funcName)s:%(lineno)d %(message)s',
 )
+#
+# A sample logging configuration. The only tangible logging
+# performed by this configuration is to send an email to
+# the site admins on every HTTP 500 error.
+# See http://docs.djangoproject.com/en/dev/topics/logging for
+# more details on how to customize your logging configuration.
+# Also make sure your enable DEBUG in settings.py. Now, you can see that logger show up in the console
+# example:
+#from django.utils.log import getLogger
+#logger = getLogger('app')
+# ..
+#logger.warning("This is warning")
+
+LOGGING = {
+    'version':1,
+    'disable_existing_loggers': False,
+    'formatters':{
+        'verbose':{
+            'format' :
+'%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+        },
+        'simple': {
+            'format': '%(levelname)s %(asctime)s  %(module)s %(message)s'
+        },
+    },
+    'handlers': {
+        'mail_admins': {
+            'level': 'ERROR',
+            'class': 'django.utils.log.AdminEmailHandler'
+        },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose'
+        },
+    },
+    'loggers': {
+        'django.request': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+        'app': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    }
+}
 
 #ADMINS and MANAGERS
 ADMINS = ()
