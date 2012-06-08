@@ -10,6 +10,9 @@ django
    settings_local.py
    -- Also make sure your enable DEBUG in settings.py. Now, you can see that logger show up in the console 
    
+   2. whoosh
+   http://www.arnebrodowski.de/blog/add-full-text-search-to-your-django-project-with-whoosh.html
+   
 2012.02.24
 ----------
 
